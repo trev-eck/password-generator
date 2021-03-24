@@ -6,7 +6,7 @@ var generateBtn = document.querySelector("#generate");
 const lowerLetters = "abcdefghijklmnopqrstuvwxyz";
 const upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const allNumbers = "0123456789";
-const specialChars = "!@#$%^&*()_+";
+const specialChars = " !#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 
 //these variables will need to be filled with input gathered from user
 let useLower = false;
@@ -36,8 +36,10 @@ function generatePassword() {
 
   // lets validate that we have been provided the minimum necessary requirements for a password
   if (isNaN(passwordLength) ||  passwordLength < 8 || passwordLength > 128) {
+    //user didnt give us a number or a value in the correct range
     return "Please enter a valid number for your password length";
   } else if (!useLower && !useUpper && !useNumbers && !useSpecial) {
+    //user didn't give us any options to build a password from
     return "Please select at least one character type for your password";
   } else {
     // we have everything we need to generate a password, lets begin
@@ -58,13 +60,14 @@ function generatePassword() {
 
     //we now have a string with all possible characters we can use for the password, we now need a loop that will select random characters from our list and save it to our users password
 
+    //run this for loop until we have found enough characters for the password
     for(let x=0; x < passwordLength; x++) {
-    //we need to create a random number that matches with a character in our charHolder string, select it, and add it to our password
+
+    //generate a random number within the length of our charHolder string, select the character at that position, and add it to our password
     userPassword+= charHolder.charAt( Math.floor( ( Math.random()*charHolder.length ) ) );
     }
-
-
   }
+  //we're all done! return the completed password
   return userPassword;
 }
 
